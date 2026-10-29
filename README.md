@@ -1,42 +1,39 @@
 # Simple Timer
+Mac用のシンプルなタイマーアプリです。
 
-A simple native macOS timer built with SwiftUI.
+![screenshot.png](screenshot.png)
 
-- Keyboard entry for minutes and seconds
-- Editable timer name, saved between launches
-- Always on Top toggle
-- Resizable window
-- Start, pause, reset, and a completion sound
+- 最前面に固定できます（右上のピンボタン）
+- 時間が過ぎるとチリンと音が鳴ります
+- 自由なテキスト入力欄があります
 
-## Download
+Apple Silicon搭載・macOS 14 Sonoma以降のMacのみに対応しています。
 
-Open this repository’s **Releases** section and download **SimpleTimer-macOS-AppleSilicon.zip** from the latest release. Unzip it and drag **SimpleTimer.app** into Applications.
 
-Requires **Apple Silicon (M1 or later) and macOS 14 or later**.
+# ダウンロード方法
+1. このGitHubページの右側にあるReleases欄のSimple Timer v...をクリック。
+2. `SimpleTimer-macOS-AppleSilicon.zip`をクリックしてダウンロードし、展開します。
+3. 現れた`SimpleTimer.app`をクリックすると、「Macに損害を与えたり、プライバシーを侵害する可能性のあるマルウェアが含まれていないことを検証できませんでした」という**警告が表示される**はずです。これは、アプリにAppleの公証がついていないためです。「完了」を押して、閉じます。
+4. Macの「システム設定」→「プライバシーとセキュリティ」をクリック。「お使いのMacを保護するために”Simple Timer.app”がブロックされました」と表示されているため、「このまま開く」をクリックします。
+5. 二回目以降は普通に起動できるようになります。
 
-This development build is ad-hoc signed and **not notarized by Apple**. macOS may prevent it from opening. Only if you trust this app, try opening it, then select **System Settings → Privacy & Security → Open Anyway** if available.
 
-## Use
 
-Enter minutes (0–999) and seconds (0–59), then click **Start**. Click **Pause** to pause and **Reset** to restore the configured duration. The pin toggles Always on Top.
 
-Space starts or pauses the timer when you are not editing text. Command-R resets it. Drag the window edges to resize it.
+# Simple Timer
 
-The timer includes elapsed time while the Mac is asleep and updates after waking. A completion sound and Dock attention request indicate completion; there is no completion message. The title is saved between launches. Timer duration and progress are not saved when you quit.
+A simple timer app for Mac.
 
-## Build
+![Screenshot](screenshot.png)
 
-Install Xcode Command Line Tools, then run:
+- Keep the window on top using the pin button in the upper-right corner.
+- A chime sounds when the time is up.
+- Enter any text you like in the text field.
 
-```sh
-bash build.sh
-open SimpleTimer.app
-```
+# How to Download
 
-The build script targets Apple Silicon and macOS 14 or later. No third-party dependencies are required.
-
-## Release
-
-Push a version tag such as `v0.4.0`. The GitHub Actions workflow builds the app, packages a ZIP, calculates a SHA-256 checksum, and attaches both files to a GitHub Release. A manual workflow run builds a downloadable Actions artifact without publishing a release.
-
-Developer ID signing and Apple notarization are not configured.
+1. Click **Simple Timer v...** under **Releases** on the right side of this GitHub page.
+2. Download `SimpleTimer-macOS-AppleSilicon.zip` and unzip it.
+3. Open `SimpleTimer.app`. You may see a warning saying that Apple could not verify that the app is free of malware that could harm your Mac or compromise your privacy. This appears because the app has not been signed with a Developer ID certificate or notarized by Apple. Click **Done** to close the warning.
+4. If you trust this app, go to **System Settings → Privacy & Security**. Find the message indicating that SimpleTimer was blocked to protect your Mac, then click **Open Anyway** and confirm.
+5. After this, you can open the app normally.
