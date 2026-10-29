@@ -1,0 +1,37 @@
+name: Build and release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build app
+        run: bash build.sh
+      - name: Verify and package
+        run: |
+          codesign --verify --strict SimpleTimer.app
+          ditto -c -k --sequesterRsrc --keepParent SimpleTimer.app SimpleTimer-macOS-AppleSilicon.zip
+          shasum -a 256 SimpleTimer-macOS-AppleSilicon.zip > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SimpleTimer-macOS-AppleSilicon
+          path: |
+            SimpleTimer-macOS-AppleSilicon.zip
+            SHA256SUMS
+      - name: Upload release files
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" SimpleTimer-macOS-AppleSilicon.zip SHA256SUMS --verify-tag --title "Simple Timer $GITHUB_REF_NAME" --notes-file RELEASE_NOTES.md
+    permissions:
+      contents: write

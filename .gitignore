@@ -1,0 +1,5 @@
+.DS_Store
+.build-cache/
+*.app/
+*.zip
+SHA256SUMS
